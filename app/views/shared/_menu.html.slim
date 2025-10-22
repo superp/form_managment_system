@@ -1,0 +1,13 @@
+nav
+  ul
+    li
+      = link_to 'Home', root_path
+
+    - if authenticated?
+      li
+        = link_to 'Dashboard', forms_path
+      li
+        = link_to 'Sign out', session_path, method: :delete
+    - else
+      li
+        = link_to 'Sign in', new_session_path

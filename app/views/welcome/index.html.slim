@@ -1,0 +1,9 @@
+h1 Welcome to Form Managment System
+
+p This is a simple form managment system.
+
+p
+  - if authenticated?
+    = link_to 'Dashboard', forms_path
+  - else
+    = link_to 'Sign in', new_session_path
