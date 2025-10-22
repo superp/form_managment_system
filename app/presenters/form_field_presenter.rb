@@ -10,45 +10,45 @@ class FormFieldPresenter
   end
 
   def current_value
-    return '' if entry_value.blank?
+    return "" if entry_value.blank?
 
     entry_value.value
   end
 
   def placeholder
     case field_type.to_s
-    when 'string'
+    when "string"
       "Enter text (#{field.min_length}-#{field.max_length} characters)"
-    when 'integer'
+    when "integer"
       "Enter number (#{field.min_value}-#{field.max_value})"
-    when 'datetime'
-      'Select date and time'
+    when "datetime"
+      "Select date and time"
     else
-      'Enter value'
+      "Enter value"
     end
   end
 
   def input_type
     case field_type
-    when 'string'
-      'text'
-    when 'integer'
-      'number'
-    when 'datetime'
-      'datetime-local'
+    when "string"
+      "text"
+    when "integer"
+      "number"
+    when "datetime"
+      "datetime-local"
     else
-      'text'
+      "text"
     end
   end
 
   def validation_attributes
     case field_type
-    when 'string'
+    when "string"
       {
         minlength: field.min_length,
         maxlength: field.max_length
       }
-    when 'integer'
+    when "integer"
       {
         min: field.min_value,
         max: field.max_value
@@ -59,15 +59,15 @@ class FormFieldPresenter
   end
 
   def formatted_datetime_value
-    return '' if current_value.blank?
+    return "" if current_value.blank?
 
     case current_value
     when String
       current_value
     when Time, DateTime
-      current_value.strftime('%Y-%m-%dT%H:%M')
+      current_value.strftime("%Y-%m-%dT%H:%M")
     else
-      ''
+      ""
     end
   end
 

@@ -1,6 +1,6 @@
 class FieldsController < ApplicationController
   load_and_authorize_resource
-  before_action :set_field, only: [:show, :edit, :update, :destroy]
+  before_action :set_field, only: [ :show, :edit, :update, :destroy ]
 
   def index
     @fields = current_user.fields.ordered
@@ -16,7 +16,7 @@ class FieldsController < ApplicationController
     @field = current_user.fields.build(field_params)
 
     if @field.save
-      redirect_to @field, notice: 'Field was successfully created.'
+      redirect_to @field, notice: "Field was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
@@ -26,7 +26,7 @@ class FieldsController < ApplicationController
 
   def update
     if @field.update(field_params)
-      redirect_to @field, notice: 'Field was successfully updated.'
+      redirect_to @field, notice: "Field was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -34,7 +34,7 @@ class FieldsController < ApplicationController
 
   def destroy
     @field.destroy
-    redirect_to fields_url, notice: 'Field was successfully destroyed.'
+    redirect_to fields_url, notice: "Field was successfully destroyed."
   end
 
   private

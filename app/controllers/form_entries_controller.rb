@@ -1,8 +1,8 @@
 class FormEntriesController < ApplicationController
   before_action :find_form
-  before_action :find_form_entry, only: [:show, :edit, :update, :destroy]
-  before_action :find_form_fields, only: [:new, :create, :edit, :update]
-  before_action :build_form_entry, only: [:new, :create]
+  before_action :find_form_entry, only: [ :show, :edit, :update, :destroy ]
+  before_action :find_form_fields, only: [ :new, :create, :edit, :update ]
+  before_action :build_form_entry, only: [ :new, :create ]
 
   def authorize_resource
     authorize! :manage, @form if @form
@@ -26,7 +26,7 @@ class FormEntriesController < ApplicationController
     @form_entry = ::CreateEntryService.new(@form, params[:entry_values]).call
 
     if @form_entry.save
-      redirect_to form_path(@form), notice: 'Form entry was successfully created.'
+      redirect_to form_path(@form), notice: "Form entry was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
@@ -38,7 +38,7 @@ class FormEntriesController < ApplicationController
     ::UpdateEntryService.new(@form_entry, params[:entry_values]).call
 
     if @form_entry.save
-      redirect_to form_path(@form), notice: 'Form entry was successfully updated.'
+      redirect_to form_path(@form), notice: "Form entry was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -46,7 +46,7 @@ class FormEntriesController < ApplicationController
 
   def destroy
     @form_entry.destroy
-    redirect_to form_path(@form), notice: 'Form entry was successfully destroyed.'
+    redirect_to form_path(@form), notice: "Form entry was successfully destroyed."
   end
 
   private

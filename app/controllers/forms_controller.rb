@@ -1,10 +1,10 @@
-require_relative '../services/create_form_service'
-require_relative '../services/update_form_service'
-require_relative '../services/csv_export_service'
+require_relative "../services/create_form_service"
+require_relative "../services/update_form_service"
+require_relative "../services/csv_export_service"
 
 class FormsController < ApplicationController
   load_and_authorize_resource
-  before_action :find_form, only: [:show, :edit, :update, :destroy, :results]
+  before_action :find_form, only: [ :show, :edit, :update, :destroy, :results ]
 
   def index
     @forms = current_user.forms.ordered
@@ -25,7 +25,7 @@ class FormsController < ApplicationController
     @available_fields = current_user.fields.ordered
 
     if @form.save
-      redirect_to @form, notice: 'Form was successfully created.'
+      redirect_to @form, notice: "Form was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
@@ -39,7 +39,7 @@ class FormsController < ApplicationController
     ::UpdateFormService.new(@form, form_params).call
 
     if @form.save
-      redirect_to @form, notice: 'Form was successfully updated.'
+      redirect_to @form, notice: "Form was successfully updated."
     else
       @available_fields = current_user.fields.ordered
       render :edit, status: :unprocessable_entity
@@ -48,7 +48,7 @@ class FormsController < ApplicationController
 
   def destroy
     @form.destroy
-    redirect_to forms_url, notice: 'Form was successfully destroyed.'
+    redirect_to forms_url, notice: "Form was successfully destroyed."
   end
 
   def results
@@ -72,7 +72,7 @@ class FormsController < ApplicationController
 
   def form_params
     params.require(:form).permit(:title, :description,
-                                 form_fields_attributes: [:id, :field_id, :position, :_destroy])
+                                 form_fields_attributes: [ :id, :field_id, :position, :_destroy ])
   end
 
   def generate_csv

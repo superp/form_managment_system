@@ -26,6 +26,6 @@ class FormEntry < ApplicationRecord
   accepts_nested_attributes_for :entry_values, allow_destroy: true
 
   def entry_number
-    form.form_entries.where('created_at <= ?', created_at).count
+    form.form_entries.where("created_at <= ?", created_at).count
   end
 end

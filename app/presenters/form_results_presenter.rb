@@ -32,18 +32,18 @@ class FormResultsPresenter
   end
 
   def csv_data
-    [header_row] + data_rows
+    [ header_row ] + data_rows
   end
 
   private
 
   def header_row
-    ['Field Name'] + form_entries.map.with_index(1) { |_entry, index| "Entry #{index}" }
+    [ "Field Name" ] + form_entries.map.with_index(1) { |_entry, index| "Entry #{index}" }
   end
 
   def data_rows
     form_fields.map do |form_field|
-      [form_field.field_name] + form_entries.map do |form_entry|
+      [ form_field.field_name ] + form_entries.map do |form_entry|
         entry_value = form_entry.entry_values.find_by(form_field: form_field)
         format_entry_value(entry_value)
       end
@@ -51,15 +51,15 @@ class FormResultsPresenter
   end
 
   def format_entry_value(entry_value)
-    return '' if entry_value.blank?
+    return "" if entry_value.blank?
 
     case entry_value.field_type
-    when 'string'
+    when "string"
       entry_value.string_value
-    when 'integer'
+    when "integer"
       entry_value.integer_value
-    when 'datetime'
-      entry_value.datetime_value&.strftime('%Y-%m-%d %H:%M')
+    when "datetime"
+      entry_value.datetime_value&.strftime("%Y-%m-%d %H:%M")
     else
       entry_value.value
     end

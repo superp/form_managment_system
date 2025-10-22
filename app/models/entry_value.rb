@@ -23,9 +23,9 @@
 #
 class EntryValue < ApplicationRecord
   HANDLERS = {
-    'string' => FieldValueHandlers::StringHandler,
-    'integer' => FieldValueHandlers::IntegerHandler,
-    'datetime' => FieldValueHandlers::DatetimeHandler
+    "string" => FieldValueHandlers::StringHandler,
+    "integer" => FieldValueHandlers::IntegerHandler,
+    "datetime" => FieldValueHandlers::DatetimeHandler
   }.freeze
 
   belongs_to :form_entry
@@ -49,11 +49,11 @@ class EntryValue < ApplicationRecord
 
   def value_attribute_name
     @value_attribute_name ||= case field_type.to_sym
-                              when :string then :string_value
-                              when :integer then :integer_value
-                              when :datetime then :datetime_value
-                              else raise ArgumentError, "Unknown field type: #{field_type}"
-                              end
+    when :string then :string_value
+    when :integer then :integer_value
+    when :datetime then :datetime_value
+    else raise ArgumentError, "Unknown field type: #{field_type}"
+    end
   end
 
   private

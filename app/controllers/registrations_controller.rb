@@ -11,7 +11,7 @@ class RegistrationsController < ApplicationController
     if @user.save
       # Automatically log in the user after registration
       start_new_session_for @user
-      redirect_to root_path, notice: 'Account created successfully!'
+      redirect_to root_path, notice: "Account created successfully!"
     else
       render :new, status: :unprocessable_entity
     end

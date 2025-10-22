@@ -6,7 +6,7 @@ class CsvExportService
   end
 
   def call
-    require 'csv'
+    require "csv"
     presenter = FormResultsPresenter.new(@form, @form_fields, @form_entries)
 
     CSV.generate do |csv|
