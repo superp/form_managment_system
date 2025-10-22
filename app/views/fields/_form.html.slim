@@ -1,0 +1,44 @@
+= form_with model: @field, local: true, data: { controller: "field-form", field_form_current_type_value: @field.field_type } do |form|
+  - if @field.errors.any?
+    div#error_explanation
+      h2 = "#{pluralize(@field.errors.count, 'error')} prohibited this field from being saved:"
+      ul
+        - @field.errors.full_messages.each do |message|
+          li = message
+
+  div.field
+    = form.label :name
+    = form.text_field :name
+
+  div.field
+    = form.label :field_type
+    = form.radio_button :field_type, 'string', data: { action: "change->field-form#fieldTypeChanged" }
+    = form.label :field_type_string, 'String'
+    = form.radio_button :field_type, 'integer', data: { action: "change->field-form#fieldTypeChanged" }
+    = form.label :field_type_integer, 'Integer'
+    = form.radio_button :field_type, 'datetime', data: { action: "change->field-form#fieldTypeChanged" }
+    = form.label :field_type_datetime, 'DateTime'
+
+  div data-field-form-target="stringValidations" style="display: none;"
+    div.field
+      = form.label :min_length
+      = form.number_field :min_length
+
+    div.field
+      = form.label :max_length
+      = form.number_field :max_length
+
+  div data-field-form-target="integerValidations" style="display: none;"
+    div.field
+      = form.label :min_value
+      = form.number_field :min_value
+
+    div.field
+      = form.label :max_value
+      = form.number_field :max_value
+
+  div data-field-form-target="datetimeValidations" style="display: none;"
+    p No additional validations needed for DateTime fields.
+
+  div.actions
+    = form.submit

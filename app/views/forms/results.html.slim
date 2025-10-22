@@ -1,0 +1,10 @@
+h1 = "#{@form.title} - Results"
+
+= download_csv_link(@form)
+= ' | '
+= link_to 'Back to Form', @form
+
+- if @form_entries.any?
+  = render_form_results_table(@form_fields, @form_entries)
+- else
+  p No entries to display.

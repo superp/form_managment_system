@@ -1,13 +1,11 @@
-nav
-  ul
-    li
-      = link_to 'Home', root_path
+header
+  nav
+    = link_to 'Home', root_path, class: current_page?(root_path) ? 'current' : ''
 
     - if authenticated?
-      li
-        = link_to 'Dashboard', forms_path
-      li
-        = link_to 'Sign out', session_path, method: :delete
+      = link_to 'Forms', forms_path, class: current_page?(forms_path) ? 'current' : ''
+      = link_to 'Fields', fields_path, class: current_page?(fields_path) ? 'current' : ''
+      = link_to 'Log out', session_path, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }
     - else
-      li
-        = link_to 'Sign in', new_session_path
+      = link_to 'Sign in', new_session_path
+      = link_to 'Sign up', new_registration_path

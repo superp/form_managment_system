@@ -1,0 +1,22 @@
+h1 = "Edit Entry ##{@form_entry.entry_number} for #{@form.title}"
+
+= form_with model: [@form, @form_entry], url: form_entry_path(@form, @form_entry), local: true do |form|
+  - if @form_entry.errors.any?
+    #error_explanation
+      h3 = "#{pluralize(@form_entry.errors.count, 'error')} prohibited this entry from being saved:"
+      ul
+        / - @form_entry.errors.full_messages.each do |message|
+        /   li = message
+        - @form_entry.entry_values.each do |entry_value|
+          - if entry_value.errors.any?
+            - entry_value.errors.full_messages.each do |message|
+              li = message
+
+  - @form_fields.each do |form_field|
+    - entry_value = @form_entry.entry_values.find_by(form_field: form_field)
+    = render_form_field(form_field, entry_value)
+
+  div.actions
+    = form.submit 'Update Entry'
+
+= link_to 'Back to Form', @form

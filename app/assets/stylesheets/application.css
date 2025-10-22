@@ -8,3 +8,128 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+/* Form Fields Management Styles */
+.form-fields-section {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+.form-field-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.field-selection {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.field-selection label {
+  font-size: 0.9em;
+  margin: 0;
+  min-width: 50px;
+}
+
+.field-select {
+  flex: 1;
+  padding: 0.25rem;
+}
+
+.field-position {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.field-position label {
+  font-size: 0.9em;
+  margin: 0;
+  min-width: 60px;
+}
+
+.position-input {
+  width: 60px;
+  padding: 0.25rem;
+  text-align: center;
+}
+
+.field-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.field-controls .button {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8em;
+}
+
+.destroy-checkbox {
+  margin-right: 0.25rem;
+}
+
+.destroy-checkbox + label {
+  font-size: 0.9em;
+  margin: 0;
+  cursor: pointer;
+}
+
+.available-fields {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #f0f8ff;
+}
+
+.field-option {
+  margin: 0.25rem 0;
+}
+
+.button.small {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8em;
+}
+
+.add-field-section {
+  margin-top: 1rem;
+  padding: 1rem;
+  text-align: center;
+  border: 2px dashed #ddd;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+/* Error messages styles */
+.field-errors {
+  margin-top: 0.25rem;
+}
+
+.error-message {
+  color: #d32f2f;
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  background: #ffebee;
+  border: 1px solid #ffcdd2;
+  border-radius: 3px;
+}
+
+.field input.error,
+.field select.error,
+.field textarea.error {
+  border-color: #d32f2f;
+  background-color: #ffebee;
+}

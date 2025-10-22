@@ -1,0 +1,29 @@
+h1 Fields
+
+= link_to 'New Field', new_field_path, class: 'button'
+
+table
+  thead
+    tr
+      th Name
+      th Type
+      th Validations
+      th Actions
+  tbody
+    - @fields.each do |field|
+      tr
+        td = field.name
+        td = field.field_type.humanize
+        td
+          - if field.string?
+            | Length: #{field.min_length}-#{field.max_length}
+          - elsif field.integer?
+            | Range: #{field.min_value}-#{field.max_value}
+          - else
+            | No validations
+        td
+          = link_to 'Show', field
+          = ' | '
+          = link_to 'Edit', edit_field_path(field)
+          = ' | '
+          = link_to 'Destroy', field, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }

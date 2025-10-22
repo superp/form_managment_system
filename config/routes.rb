@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resource :session
+  resource :registration, only: [:new, :create]
   resources :passwords, param: :token
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -14,5 +15,9 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root 'welcome#index'
 
-  resources :forms
+  resources :fields
+  resources :forms do
+    resources :entries, controller: 'form_entries'
+    get 'results', on: :member
+  end
 end

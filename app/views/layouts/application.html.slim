@@ -16,10 +16,16 @@ html lang="en"
     link rel="icon" href="/icon.svg" type="image/svg+xml"
     link rel="apple-touch-icon" href="/icon.png"
 
+    link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css"
     = stylesheet_link_tag :app, "data-turbo-track": "reload"
     = javascript_importmap_tags
 
   body
     = render 'shared/menu'
+
+    - if notice
+      p.notice = notice
+    - if alert
+      p.alert = alert
 
     = yield

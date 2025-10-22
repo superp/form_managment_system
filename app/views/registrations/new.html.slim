@@ -1,0 +1,26 @@
+h1 Sign Up
+
+= form_for @user, url: registration_path do |form|
+  - if @user.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@user.errors.count, 'error')} prohibited this user from being saved:"
+      ul
+        - @user.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = form.label :email_address, 'Email'
+    = form.email_field :email_address
+
+  .field
+    = form.label :password
+    = form.password_field :password
+
+  .field
+    = form.label :password_confirmation, 'Confirm Password'
+    = form.password_field :password_confirmation
+
+  .actions
+    = form.submit 'Sign Up'
+
+= link_to 'Already have an account? Sign in', new_session_path

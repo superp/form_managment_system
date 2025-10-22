@@ -1,0 +1,46 @@
+= form_with model: @form, local: true, data: { controller: "form-fields", form_fields_available_fields_value: @available_fields.to_json } do |form|
+  - if @form.errors.any?
+    div#error_explanation
+      h2 = "#{pluralize(@form.errors.count, 'error')} prohibited this form from being saved:"
+      ul
+        - @form.errors.full_messages.each do |message|
+          li = message
+
+  div.field
+    = form.label :title
+    = form.text_field :title
+
+  div.field
+    = form.label :description
+    = form.text_area :description
+
+  div.field
+    h3 Form Fields
+    p Add fields to your form and arrange them in the desired order.
+
+    div.form-fields-section
+      h4 Form Fields (in order)
+      div data-form-fields-target="fieldList"
+        = form.fields_for :form_fields do |form_field_form|
+          div.form-field-item
+            div.field-selection
+              = form_field_form.label :field_id, "Field:"
+              = form_field_form.select :field_id,
+                  options_from_collection_for_select(@available_fields, :id, :name_with_type, form_field_form.object.field_id),
+                  { prompt: "Select a field" },
+                  { class: "field-select" }
+            div.field-position
+              = form_field_form.label :position, "Position:"
+              = form_field_form.number_field :position, min: 1, class: "position-input"
+            div.field-controls
+              = form_field_form.check_box :_destroy, class: "destroy-checkbox"
+              = form_field_form.label :_destroy, "Remove"
+
+      div.add-field-section
+        = button_tag "Add Field",
+            type: "button",
+            class: "button",
+            data: { action: "click->form-fields#addField" }
+
+  div.actions
+    = form.submit

@@ -1,9 +1,16 @@
-h1 Welcome to Form Managment System
+h1 Welcome to Form Management System
 
-p This is a simple form managment system.
+p This is a simple form management system that allows you to create forms, add fields with validations, and collect data.
 
-p
-  - if authenticated?
-    = link_to 'Dashboard', forms_path
-  - else
-    = link_to 'Sign in', new_session_path
+- if authenticated?
+  h2 Your Dashboard
+  p
+    = link_to 'View Forms', forms_path, class: 'button'
+    = ' '
+    = link_to 'Manage Fields', fields_path, class: 'button'
+- else
+  h2 Get Started
+  p
+    = link_to 'Sign in', new_session_path, class: 'button'
+    = ' '
+    = link_to 'Sign up', new_registration_path, class: 'button'

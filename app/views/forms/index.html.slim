@@ -1,0 +1,27 @@
+h1 Forms
+
+= link_to 'New Form', new_form_path, class: 'button'
+
+table
+  thead
+    tr
+      th Title
+      th Description
+      th Fields Count
+      th Entries Count
+      th Actions
+  tbody
+    - @forms.each do |form|
+      tr
+        td = form.title
+        td = truncate(form.description, length: 50)
+        td = form.form_fields.count
+        td = form.form_entries.count
+        td
+          = link_to 'Show', form
+          = ' | '
+          = link_to 'Edit', edit_form_path(form)
+          = ' | '
+          = link_to 'Results', results_form_path(form)
+          = ' | '
+          = link_to 'Destroy', form, method: :delete, data: { turbo_confirm: 'Are you sure?' }

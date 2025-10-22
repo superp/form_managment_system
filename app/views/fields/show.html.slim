@@ -1,0 +1,28 @@
+h1 Field Details
+
+p
+  strong Name:
+  = @field.name
+
+p
+  strong Type:
+  = @field.field_type.humanize
+
+- if @field.string?
+  p
+    strong Min Length:
+    = @field.min_length
+  p
+    strong Max Length:
+    = @field.max_length
+- elsif @field.integer?
+  p
+    strong Min Value:
+    = @field.min_value
+  p
+    strong Max Value:
+    = @field.max_value
+
+= link_to 'Edit', edit_field_path(@field)
+= ' | '
+= link_to 'Back', fields_path

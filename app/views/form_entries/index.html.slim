@@ -1,0 +1,23 @@
+h1 = "#{@form.title} - Entries"
+
+= link_to 'New Entry', new_form_entry_path(@form), class: 'button'
+= ' | '
+= link_to 'Back to Form', @form
+
+table
+  thead
+    tr
+      th Entry #
+      th Created
+      th Actions
+  tbody
+    - @form_entries.each do |entry|
+      tr
+        td = entry.entry_number
+        td = entry.created_at.strftime('%Y-%m-%d %H:%M')
+        td
+          = link_to 'View', form_entry_path(@form, entry)
+          = ' | '
+          = link_to 'Edit', edit_form_entry_path(@form, entry)
+          = ' | '
+          = link_to 'Destroy', form_entry_path(@form, entry), method: :delete, data: { turbo_confirm: 'Are you sure?' }

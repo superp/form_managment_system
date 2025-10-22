@@ -1,0 +1,60 @@
+h1 = @form.title
+
+p
+  strong Description:
+  = @form.description
+
+h2 Fields
+- if @form_fields.any?
+  table
+    thead
+      tr
+        th Position
+        th Name
+        th Type
+        th Validations
+    tbody
+      - @form_fields.each do |form_field|
+        tr
+          td = form_field.position
+          td = form_field.field_name
+          td = form_field.field_type.humanize
+          td
+            - if form_field.field.string?
+              | Length: #{form_field.field.min_length}-#{form_field.field.max_length}
+            - elsif form_field.field.integer?
+              | Range: #{form_field.field.min_value}-#{form_field.field.max_value}
+            - else
+              | No validations
+- else
+  p No fields added to this form yet.
+
+h2 Entries
+- if @form_entries.any?
+  table
+    thead
+      tr
+        th Entry #
+        th Created
+        th Actions
+    tbody
+      - @form_entries.each do |entry|
+        tr
+          td = entry.entry_number
+          td = entry.created_at.strftime('%Y-%m-%d %H:%M')
+          td
+            = link_to 'View', form_entry_path(@form, entry)
+            = ' | '
+            = link_to 'Edit', edit_form_entry_path(@form, entry)
+            = ' | '
+            = link_to 'Destroy', form_entry_path(@form, entry), method: :delete, data: { turbo_confirm: 'Are you sure?' }
+- else
+  p No entries yet.
+
+= link_to 'Fill Form', new_form_entry_path(@form), class: 'button'
+= ' | '
+= link_to 'Results', results_form_path(@form), class: 'button'
+= ' | '
+= link_to 'Edit', edit_form_path(@form)
+= ' | '
+= link_to 'Back', forms_path
